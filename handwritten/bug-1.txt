@@ -1,0 +1,15 @@
+Bug 1: Archived Tasks Appearing in Search
+
+Location: TaskRepository.java
+
+Problem:
+While searching for a task, an archived task could also appear in the results.
+
+Root Cause:
+The SQL query used AND and OR without proper parentheses. Because of operator precedence, the description search could bypass the archived = FALSE condition.
+
+Fix:
+I added parentheses around the title and description conditions so that archived = FALSE applies to both.
+
+Result:
+Archived tasks are now excluded from search results.

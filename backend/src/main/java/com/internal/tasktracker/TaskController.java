@@ -47,6 +47,9 @@ public class TaskController {
 
         List<Task> allResults = taskRepository.searchTasks(searchTerm, normalizedStatus);
 
+                // Ensure pagination parameters are positive
+        page = Math.max(page, 1);
+        pageSize = Math.max(pageSize, 1);
         int start = (page - 1) * pageSize;
         int end = Math.min(start + pageSize, allResults.size());
         List<Task> pageResults = (start < allResults.size())

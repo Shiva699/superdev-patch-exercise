@@ -1,0 +1,15 @@
+Bug 2: Loading State Stuck on API Error
+
+Location: frontend/src/hooks/useTasks.js
+
+Problem:
+When the backend/API failed, the page remained in the loading state.
+
+Root Cause:
+setLoading(true) was called before the request, but setLoading(false) was missing inside the error handler.
+
+Fix:
+Added setLoading(false) inside the .catch() block.
+
+Result:
+The loading state now ends even when the API request fails.

@@ -1,0 +1,15 @@
+Bug 3: Invalid Pagination Parameters
+
+Location: TaskController.java
+
+Problem:
+Using page=0 or pageSize=0 could cause invalid list indexes and an error.
+
+Root Cause:
+The controller used invalid pagination values directly when calculating the list indexes.
+
+Fix:
+I used Math.max(value, 1) for both page and pageSize.
+
+Result:
+Invalid pagination values are normalized and no longer cause negative-index errors.
